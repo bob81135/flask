@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Flask-SocketIO Test</title>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <script type="text/javascript" src="//code.jquery.com/jquery-git.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            var socket = io.connect();
+            socket.on('status_response', function(data) {
+                $('#status').append('<p>'+data.id+':' + data.msg + "  Time:"+ data.date+ '</p>');
+            });
+            function changeName(){
+                var name = $("#name").val();
+                $('#user_name').html(name);
+            }
+            function sendMessage(){
+                axios.post('/message', {
+                    ID: $("#user_name").html(),
+                    Message: $("#msg").val()
+                }).then(function (response) {
+                    console.log(response);
+                })
+            }
+        </script>
+    </head>
+    <body>
+        <div id="status" style="width: 100%;height: 350px;border: 1px solid darkolivegreen;border-radius: 5px;overflow: auto;" ></div>
+        <div>
+            <label id="user_name">guess(預設)</label><br>
+            <label>改名</label>
+            <input type="text" id="name"><br>
+            <button onclick="changeName()">確認改名</button>
+        </div>
+        <div>
+            <label id="msg_label">訊息框</label><br>
+            <label>內容</label>
+            <input type="text" id="msg"><br>
+            <button onclick="sendMessage()">送出</button>
+        </div>
+    </body>
+</html>
