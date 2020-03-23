@@ -42,6 +42,7 @@ def request_loader(request):
     return
 #傳送訊息api
 @app.route("/message", methods=['POST'])
+@flask_login.login_required
 def upload():
     try:
         test = request.json
