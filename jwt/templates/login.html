@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<br>
+<div style="text-align:center;">
+    <h1>登入頁面</h1>
+    <p>帳號：
+        <input type="text" id="id" />
+    </p>
+    <p>密碼：
+        <input type="password" id="password" />
+    </p>
+    <p>
+        <button onclick="login()">送出</button>
+    </p>
+    <h2>{{error}}</h2>
+<div>
+{% endblock %}

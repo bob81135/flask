@@ -1,0 +1,31 @@
+<html>
+    <head>
+            <title>Flask-SocketIO Test</title>
+            <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+            <script type="text/javascript" src="//code.jquery.com/jquery-git.min.js"></script>
+            <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+            <script type="text/javascript" charset="utf-8">
+            function login(){
+                axios.post('/', {
+                    id: $("#id").val(),
+                    password: $("#password").val()
+                }).then(function (response) {
+                    axios.get('/user', {
+                        headers: {
+                            'Authorization': `Bearer ${response.data.access_token}`
+                        }
+                    }).then(function (response) {
+                        console.log(response);
+                    })
+                })
+            }
+            </script>
+    </head>
+    <body>
+        <div style="text-align:center;">
+            <input type="button" value="登入頁面" onclick="location.href='/'">
+            <input type="button" value="註冊頁面" onclick="location.href='register'">
+        </div>
+        {% block content %}{% endblock %}
+    </body>
+</html>
